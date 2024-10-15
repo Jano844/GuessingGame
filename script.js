@@ -20,5 +20,22 @@ function handleOrientation(event) {
     }
 }
 
-// Ereignis-Listener hinzufügen
-window.addEventListener('deviceorientation', handleOrientation);
+// Berechtigungen anfordern
+if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission()
+        .then(permissionState => {
+            if (permissionState === 'granted') {
+                // Berechtigung erteilt
+                window.addEventListener('deviceorientation', handleOrientation);
+            } else {
+                // Berechtigung verweigert
+                alert("Berechtigung für die Geräteorientierung wurde verweigert.");
+            }
+        })
+        .catch(error => {
+            console.error("Fehler beim Anfordern der Berechtigung:", error);
+        });
+} else {
+    // Fallback für Geräte, die keine Berechtigung benötigen
+    window.addEventListener('deviceorientation', handleOrientation);
+}
