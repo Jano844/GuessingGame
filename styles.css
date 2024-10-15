@@ -1,75 +1,18 @@
-* {
-    box-sizing: border-box; /* Box-sizing für alle Elemente setzen */
-}
-
 body {
-    background-color: #8bbfcd;
-    height: 100%;
-    margin: 0;
+    background-color: lightblue; /* Standard Hintergrundfarbe */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Höhe des Viewports */
+    margin: 0; /* Kein Margin */
+    text-align: center; /* Text zentrieren */
+    font-family: Arial, sans-serif; /* Schriftart */
 }
 
 h1 {
-    text-align: center;
-    font-size: 300%;
-    color: rgb(52, 43, 43);
-    margin-top: 100px;
+    font-size: 2rem; /* Schriftgröße */
 }
 
-.container {
-    display: flex; /* Flexbox aktivieren */
-    width: 100%; /* Volle Breite */
-    height: 100vh; /* Volle Höhe des Viewports */
-    flex-wrap: wrap; /* Elemente umschließen, wenn der Platz nicht reicht */
-}
-
-.half {
-    flex: 1; /* Flex-Elemente */
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.left, .right {
-    display: flex;
-    flex-direction: column; /* Buttons untereinander anordnen */
-    align-items: center; /* Buttons zentrieren */
-}
-
-.button {
-    display: flex; /* Verwende Flexbox für die Buttons */
-    justify-content: center; /* Zentriere den Text horizontal */
-    align-items: center; /* Zentriere den Text vertikal */
-    width: 200px;
-    height: 100px;
-    color: rgb(52, 43, 43);
-    font-size: 40px;
-    cursor: pointer;
-    margin: 10px 0; /* Abstand zwischen den Buttons */
-    border-radius: 80px;
-    outline-width: 2px;
-    outline-color: black;
-    outline-style: solid;
-}
-
-.button:hover {
-    background-color: #78cfe4;
-}
-
-.button:active {
-    background-color: #59bada;
-}
-
-/* Media Queries für mobile Anpassung */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 200%; /* Kleinere Schriftgröße für mobile Geräte */
-    }
-
-    .container {
-        flex-direction: column; /* Elemente untereinander anordnen */
-    }
-
-    .half {
-        width: 100%; /* Volle Breite auf mobilen Geräten */
-        height: auto; /* Höhe anpassen */
-    }
+p {
+    font-size: 1.5rem; /* Schriftgröße */
 }
