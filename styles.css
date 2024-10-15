@@ -1,18 +1,14 @@
 body {
-    background-color: lightblue; /* Standard Hintergrundfarbe */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Höhe des Viewports */
-    margin: 0; /* Kein Margin */
-    text-align: center; /* Text zentrieren */
-    font-family: Arial, sans-serif; /* Schriftart */
+    height: 100vh;
+    margin: 0;
+    background-color: lightblue; /* Standardfarbe */
+    transition: background-color 0.5s; /* Sanfte Farbänderung */
 }
 
 h1 {
-    font-size: 2rem; /* Schriftgröße */
-}
-
-p {
-    font-size: 1.5rem; /* Schriftgröße */
+    font-family: Arial, sans-serif;
+    text-align: center;
 }

@@ -1,41 +1,28 @@
-// Funktion zur Handhabung der Geräteorientierung
-function handleOrientation(event) {
-    const beta = event.beta;   // Neigung um die X-Achse
+let initialOrientation = null;
 
-    // Überprüfen, ob das Gerät nach oben oder unten geneigt ist
-    const threshold = 10; // Schwellenwert für die Neigung (in Grad)
+function changeBackgroundColor(color) {
+    document.body.style.backgroundColor = color;
+    setTimeout(() => {
+        document.body.style.backgroundColor = 'lightblue'; // Zurück zur Standardfarbe
+    }, 1000);
+}
 
-    if (beta > threshold) {
-        // Handy ist nach oben geneigt
-        document.body.style.backgroundColor = "red"; // Hintergrund rot
-        setTimeout(() => {
-            document.body.style.backgroundColor = "lightblue"; // Hintergrund zurücksetzen
-        }, 1000); // Nach 1 Sekunde zurücksetzen
-    } else if (beta < -threshold) {
-        // Handy ist nach unten geneigt
-        document.body.style.backgroundColor = "green"; // Hintergrund grün
-        setTimeout(() => {
-            document.body.style.backgroundColor = "lightblue"; // Hintergrund zurücksetzen
-        }, 1000); // Nach 1 Sekunde zurücksetzen
+window.addEventListener('deviceorientation', (event) => {
+    if (initialOrientation === null) {
+        initialOrientation = {
+            alpha: event.alpha,
+            beta: event.beta,
+            gamma: event.gamma
+        };
     }
-}
 
-// Berechtigungen anfordern
-if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission()
-        .then(permissionState => {
-            if (permissionState === 'granted') {
-                // Berechtigung erteilt
-                window.addEventListener('deviceorientation', handleOrientation);
-            } else {
-                // Berechtigung verweigert
-                alert("Berechtigung für die Geräteorientierung wurde verweigert.");
-            }
-        })
-        .catch(error => {
-            console.error("Fehler beim Anfordern der Berechtigung:", error);
-        });
-} else {
-    // Fallback für Geräte, die keine Berechtigung benötigen
-    window.addEventListener('deviceorientation', handleOrientation);
-}
+    const calibratedAlpha = event.alpha - initialOrientation.alpha;
+    const calibratedBeta = event.beta - initialOrientation.beta;
+
+    // Die Schwellenwerte für das Ändern der Hintergrundfarbe
+    if (calibratedBeta > 10) { // Nach oben geneigt
+        changeBackgroundColor('red');
+    } else if (calibratedBeta < -10) { // Nach unten geneigt
+        changeBackgroundColor('green');
+    }
+});
